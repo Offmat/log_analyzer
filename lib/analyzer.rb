@@ -4,3 +4,4 @@ require 'pry'
 
 require 'analyzer/runner'
 require 'analyzer/parsed_logfile'
+require 'analyzer/url'

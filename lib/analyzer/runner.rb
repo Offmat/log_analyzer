@@ -7,13 +7,15 @@ module Analyzer
     end
 
     def call
-      path_provided? ? parse_logfile : print_no_path_error
+      return print_no_path_error unless path_provided?
+
+      parsed_logfile
     end
 
     private
 
-    def parse_logfile
-      ParsedLogfile.new(@file_path).call
+    def parsed_logfile
+      ParsedLogfile.new(@file_path)
     end
 
     def path_provided?

@@ -5,6 +5,10 @@ AllCops:
     - bin/**/*
     - exe/**/*
 
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+
 Metrics/LineLength:
   Max: 140
 
