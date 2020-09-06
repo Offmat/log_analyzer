@@ -32,8 +32,8 @@ RSpec.describe Analyzer::ParsedLogfile do
     let(:file_path) { 'spec/fixtures/test.log' }
 
     it 'returns properly ordered collection of urls' do
-      expect(subject.ordered_by_occurances.map(&:name)).to eq ['/about/2', '/contact', '/home']
-      expect(subject.ordered_by_occurances.map(&:occurences_count)).to eq [4, 3, 1]
+      expect(subject.ordered_by_occurances.map { |url| url[:name] }).to eq ['/about/2', '/contact', '/home']
+      expect(subject.ordered_by_occurances.map { |url| url[:occurences_count] }).to eq [4, 3, 1]
     end
   end
 
@@ -41,8 +41,8 @@ RSpec.describe Analyzer::ParsedLogfile do
     let(:file_path) { 'spec/fixtures/test.log' }
 
     it 'returns properly ordered collection of urls' do
-      expect(subject.ordered_by_uniq_occurances.map(&:name)).to eq ['/contact', '/about/2', '/home']
-      expect(subject.ordered_by_uniq_occurances.map(&:uniq_occurences_count)).to eq [3, 2, 1]
+      expect(subject.ordered_by_uniq_occurances.map { |url| url[:name] }).to eq ['/contact', '/about/2', '/home']
+      expect(subject.ordered_by_uniq_occurances.map { |url| url[:occurences_count] }).to eq [3, 2, 1]
     end
   end
 end

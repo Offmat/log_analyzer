@@ -12,11 +12,21 @@ module Analyzer
     end
 
     def ordered_by_occurances
-      urls.sort_by(&:occurences_count).reverse
+      urls.sort_by(&:occurences_count).reverse.map do |url|
+        {
+          name: url.name,
+          occurences_count: url.occurences_count
+        }
+      end
     end
 
     def ordered_by_uniq_occurances
-      urls.sort_by(&:uniq_occurences_count).reverse
+      urls.sort_by(&:uniq_occurences_count).reverse.map do |url|
+        {
+          name: url.name,
+          occurences_count: url.uniq_occurences_count
+        }
+      end
     end
 
     private

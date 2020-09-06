@@ -23,10 +23,10 @@ RSpec.describe Analyzer::Runner do
     end
 
     context 'when valid path is provided' do
-      let(:file_path) { '/spec/fixtures/test.log' }
+      let(:file_path) { 'spec/fixtures/test.log' }
 
       it 'calls file parser' do
-        expect(Analyzer::ParsedLogfile).to receive(:new).with(file_path)
+        expect(Analyzer::ParsedLogfile).to receive(:new).with(file_path).and_call_original
 
         subject.call
       end
