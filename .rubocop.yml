@@ -1,0 +1,8 @@
+AllCops:
+  TargetRubyVersion: 2.6.3
+  Exclude:
+    - bin/**/*
+    - exe/**/*
+
+Style/Documentation:
+  Enabled: false
