@@ -6,4 +6,4 @@ require 'bundler/setup'
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'analyzer'
 
-Analyzer::Runner.new(ARGV).call
+Analyzer::Runner.new(ARGV[0]).call
