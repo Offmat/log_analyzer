@@ -3,7 +3,7 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'analyzer'
 
-Dir[File.expand_path('spec/support/**/*.rb')].each { |f| require f }
+Dir[File.expand_path('spec/support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

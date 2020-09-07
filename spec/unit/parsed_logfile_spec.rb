@@ -21,7 +21,7 @@ RSpec.describe Analyzer::ParsedLogfile do
       end
 
       it 'sends grouped data to Url' do
-        expect(Analyzer::Url).to receive(:new).exactly(3).times
+        expect(Analyzer::Url).to receive(:new).exactly(3).times.and_call_original
 
         subject
       end

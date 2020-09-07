@@ -12,43 +12,47 @@ module Analyzer
     end
 
     def ordered_by_occurances
-      urls.sort_by(&:occurences_count).reverse.map do |url|
-        {
-          name: url.name,
-          occurences_count: url.occurences_count
-        }
-      end
+      parsed_statistic(:occurences_count)
     end
 
     def ordered_by_uniq_occurances
-      urls.sort_by(&:uniq_occurences_count).reverse.map do |url|
-        {
-          name: url.name,
-          occurences_count: url.uniq_occurences_count
-        }
-      end
+      parsed_statistic(:uniq_occurences_count)
     end
 
     private
 
-    def analyze
-      veryfy_file
+    attr_writer :urls
 
-      grouped_urls.each do |name, occurences|
-        @urls << Analyzer::Url.new(name, occurences.flatten)
+    def analyze
+      verify_file
+
+      parse_file
+    end
+
+    def verify_file
+      raise(NoFileError) unless File.file?(@file_path)
+    end
+
+    def parse_file
+      file.each_line do |line|
+        url_address, ip_address = line.split
+
+        url = find_or_initialize_url(url_address)
+        url.new_occurence(ip_address)
       end
     end
 
-    def grouped_urls
-      raw_urls.group_by(&:shift)
+    def find_or_initialize_url(url_address)
+      urls.find { |url| url.name == url_address } || urls.push(Url.new(url_address)).last
     end
 
-    def raw_urls
-      file.map(&:split)
-    end
-
-    def veryfy_file
-      raise(NoFileError) unless File.file?(@file_path)
+    def parsed_statistic(statistics_kind)
+      urls.sort_by(&statistics_kind).reverse.map do |url|
+        {
+          name: url.name,
+          occurences_count: url.public_send(statistics_kind)
+        }
+      end
     end
 
     def file

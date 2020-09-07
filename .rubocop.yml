@@ -9,8 +9,13 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*.rb
 
-Metrics/LineLength:
-  Max: 140
+Layout:
+  Metrics/LineLength:
+    Max: 140
 
 Style/Documentation:
   Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - spec/**/*.rb

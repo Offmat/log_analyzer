@@ -14,8 +14,10 @@ module Analyzer
 
     private
 
+    attr_reader :file_path
+
     def path_provided?
-      !@file_path.nil? && !@file_path.empty?
+      !file_path.nil? && !file_path.empty?
     end
 
     def print_no_path_error
@@ -37,7 +39,7 @@ module Analyzer
     end
 
     def parsed_logfile
-      @parsed_logfile ||= ParsedLogfile.new(@file_path)
+      @parsed_logfile ||= ParsedLogfile.new(file_path)
     end
   end
 end
