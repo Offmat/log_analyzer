@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Analyzer::Runner do
+  include_context 'silence output'
+
   subject { described_class.new file_path }
 
   describe '#call' do
